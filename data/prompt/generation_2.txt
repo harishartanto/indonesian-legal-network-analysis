@@ -1,0 +1,43 @@
+You will receive a branch from a topic hierarchy along with some Indonesian legal document's set of keywords (separated by `;`) assigned to the top-level topic of that branch. Your task is to identify generalizable second-level topics that can act as subtopics to the top-level topic in the provided branch. Add your topic(s) if they are missing from the provided branch. Otherwise, return the existing relevant or duplicate topics.
+
+[Example: Return "[2] Pajak Bumi dan Bangunan" (new) and "[2] Pajak Penghasilan" (existing) as the subtopics of "[1] Pajak" (provided).]
+Topic branch:
+[1] Pajak
+    [2] Pajak Penghasilan
+    [2] Pajak Pertambahan Nilai
+
+Document 1:
+Undang-Undang Ketentuan Umum dan Tata Cara Perpajakan; Undang-Undang Pajak Bumi dan Bangunan; Pajak Bumi dan Bangunan; Objek pajak PBB; Pengurangan PBB; Surat Pemberitahuan Pajak Terutang; Surat Ketetapan Pajak PBB; Surat Tagihan Pajak PBB; Kantor Pelayanan Pajak; Kantor Wilayah Direktorat Jenderal Pajak
+
+Document 2:
+Undang-Undang Pajak Penghasilan; Perbankan Syariah; Simpanan; Prinsip Syariah; Nasabah Investor; Nasabah Penyimpan; Nasabah Penerima Fasilitas
+
+Document 3:
+Undang-Undang Pajak Pertambahan Nilai; Pengusaha; Pengusaha Kena Pajak; Faktur Pajak; Pajak Masukan; Dasar Pengenaan Pajak; Nilai Lain; Emas Perhiasan; Menghasilkan
+
+Your response:
+[1] Pajak
+    [2] Pajak Penghasilan (Document: 2): Mentions tax policies on income.
+    [2] Pajak Pertambahan Nilai (Document: 3): Mentions tax policies on value-added.
+    [2] Pajak Bumi dan Bangunan (Document: 1): Mentions tax policies on land and buildings.
+
+[Instructions]
+Step 1: Determine PRIMARY and GENERALIZABLE topics mentioned in the documents.
+- The topics must be generalizable among the provided documents.
+- Each topic must not be too specific so that it can accommodate future subtopics.
+- Each topic must reflect a SINGLE topic instead of a combination of topics.
+- Each top-level topic must have a level number and a short label. Second-level topics should also include the original documents associated with these topics (separated by commas) as well as a short description of the topic.
+- The number of topics proposed cannot exceed the number of documents provided.
+Step 2: Perform ONE of the following operations:
+1. If the provided top-level topic is specific enough, DO NOT add any subtopics. Return the provided top-level topic.
+2. If your topic is duplicate or relevant to the provided topics, DO NOT add any subtopics. Return the existing relevant topic.
+3. If your topic is relevant to and more specific than the provided top-level topic, add your topic as a second-level topic. DO NOT add to the first or third level of the hierarchy.
+
+[Topic branch]
+{Topic}
+
+[Documents]
+{Document}
+
+DO NOT add first- or third-level topics.
+[Your response]

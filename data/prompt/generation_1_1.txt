@@ -1,0 +1,36 @@
+You will receive a Indonesian legal document's set of keywords (separated by `;`) . Your task is to identify generalizable topics within the document that can act as top-level topics in the hierarchy.
+
+[Examples]
+Example 1: Adding "[1] Nuklir"
+Document's set of keywords:
+Badan Tenaga Nuklir Nasional merupakan Badan Pelaksana; KEDUDUKAN, TUGAS, DAN FUNGSI; ORGANISASI; TATA KERJA; ESELON, PENGANGKATAN, DAN PEMBERHENTIAN; PENDANAAN; Susunan Organisasi; Kepala; Sekretariat Utama; Deputi Bidang Sains dan Aplikasi Teknologi Nuklir; Deputi Bidang Teknologi Energi Nuklir; Deputi Bidang Pendayagunaan Teknologi Nuklir; Unsur Pengawas; Unsur Pendukung; Unit Jaminan Mutu dan Unit Pengamanan Nuklir; Unit Pelaksana Teknis; Jabatan Fungsional
+
+Your response: 
+[1] Nuklir: Discusses the roles and responsibilities of the National Nuclear Energy Agency.
+
+Example 2: Adding "[1] Pajak"
+Document's set of keywords:
+Undang-Undang Ketentuan Umum dan Tata Cara Perpajakan; Undang-Undang Pajak Bumi dan Bangunan; Pajak Bumi dan Bangunan; Objek pajak PBB; Pengurangan PBB; Surat Pemberitahuan Pajak Terutang; Surat Ketetapan Pajak PBB; Surat Tagihan Pajak PBB; Kantor Pelayanan Pajak; Kantor Wilayah Direktorat Jenderal Pajak
+
+Your response: 
+[1] Pajak: Discusses the general tax laws and procedures.
+
+[Instructions]
+Step 1: Determine topics mentioned in the document's set of keywords.
+- The topics labels must be as GENERALIZABLE as possible. They must not be document-specific.
+- The topics must reflect a SINGLE topic instead of a combination of topics.
+- The topics must have a level number, a short general label, and a topic description.
+- The topics must be broad enough to accommodate future subtopics.
+- The UPPERCASE keywords are level-1 heading names (chapters), so consider these keywords with a LOWER WEIGHT when considering a topic because they often do not adequately represent the content of the document.
+- The maximum number of generated topics is 5. So if there are more than 5 topics, return the most relevant ones.
+Step 2: Perform ONE of the following operations: 
+1. If there are already duplicates or relevant topics in the hierarchy, output those topics and stop here. 
+2. If the document contains no topic, return "None". 
+3. Otherwise, add your topic as a top-level topic. Stop here and output the added topic(s). DO NOT add any additional levels.
+
+
+[Document's set of keywords]
+{Document}
+
+Please ONLY return the relevant or modified topics at the TOP LEVEL (level-1) in the hierarchy.
+[Your response]
