@@ -1,2 +1,11 @@
 .env
 test/
+topic extraction/heuristics/__pycache__
+topic extraction/heuristics/config
+data/output/
+data/prompt/
+topic extraction/heuristics/generation_1.py
+topic extraction/heuristics/generation_2.py
+topic extraction/heuristics/get_topics.ipynb
+topic extraction/heuristics/refinement.py
+topic extraction/heuristics/utils.py
