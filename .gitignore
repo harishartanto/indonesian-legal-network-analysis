@@ -2,3 +2,4 @@
 test/
 topic extraction/heuristics/__pycache__
 topic extraction/heuristics/config
+data/json/

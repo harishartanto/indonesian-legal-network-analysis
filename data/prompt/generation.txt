@@ -1,0 +1,13 @@
+Anda akan menerima konsideran dari peraturan perundang-undangan (PUU) yang berjudul "{doc_title}". Tugas anda adalah mengusulkan topik-topik umum (general) dari konsideran PUU yang diberikan.
+
+[Instruksi]
+Usulkan topik-topik yang dibahas dalam konsideran PUU yang diberikan.
+1. Label topik harus dapat digeneralisasikan seluas mungkin. Label tersebut tidak boleh terlalu spesifik atau terfokus pada PUU yang diberikan.
+2. Label topik yang diusulkan harus berupa kata benda yang mewakili subjek atau objek tunggal, maksimal tiga kata.
+3. Berikan respon dalam format "Label 1; Label 2; Label 3; dst.".
+
+[Konsideran]
+Menimbang: {doc_consideration}
+
+Mohon hanya berikan label topik yang diusulkan dalam respon Anda.
+[Respon Anda]
