@@ -1,4 +1,5 @@
 .env
 _dump/
-topic extraction/__pycache__
 data/prompt/
+topic extraction/__pycache__
+topic visualization/lib/
