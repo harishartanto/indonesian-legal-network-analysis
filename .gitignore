@@ -1,6 +1,4 @@
 .env
-test/
-topic extraction/heuristics/__pycache__
-topic extraction/heuristics/config
-data/json/
+_dump/
+topic extraction/__pycache__
 data/prompt/
