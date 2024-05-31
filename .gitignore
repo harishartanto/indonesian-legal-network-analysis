@@ -1,5 +1,4 @@
 .env
-.gitignore
 _dump/
 topic extraction/__pycache__
-data/prompt/generation.txt
+data/prompt/
