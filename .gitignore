@@ -1,5 +1,8 @@
 .env
+.venv/
 _dump/
 data/prompt/
+data/files/
+__pycache__/
 topic extraction/__pycache__
 topic visualization/lib/
