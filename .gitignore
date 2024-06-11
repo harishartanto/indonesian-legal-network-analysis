@@ -3,6 +3,7 @@
 _dump/
 data/prompt/
 data/files/
+data/docs/
 __pycache__/
 topic extraction/__pycache__
 topic visualization/lib/
