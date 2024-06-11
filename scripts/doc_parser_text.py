@@ -1,5 +1,4 @@
 import re
-import sys
 
 
 def DetectDefinition(Text):
@@ -75,3 +74,8 @@ def get_doc_definitionterms(first_article_content):
                 terms.append(term['Term'])
     
     return terms
+
+def split_headingterms(heading_content, splitter):
+    separated_header_values = [subitem for item in heading_content for subitem in item.split(splitter)]
+    unique_header_values = list(dict.fromkeys(separated_header_values))
+    return unique_header_values
