@@ -11,6 +11,7 @@ def get_doc_info(json_blocks):
         doc_number = json_blocks.get('No', '')
         doc_year = json_blocks.get('Tahun', '')
         doc_status = json_blocks.get('Status', '')
+        doc_type = json_blocks.get('Bentuk', '')
 
         # create a dictionary with the document information
         document_info = {
@@ -18,7 +19,8 @@ def get_doc_info(json_blocks):
             "doc_law_number": doc_law_number,
             "doc_number": doc_number,
             "doc_year": doc_year,
-            "doc_status": doc_status
+            "doc_status": doc_status,
+            "doc_type": doc_type
         }
 
         return document_info
