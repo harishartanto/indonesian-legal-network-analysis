@@ -3,7 +3,7 @@ import sys
 import json
 import time
 import pandas as pd
-from doc_keywords_parser import *
+from scripts.doc_parser_text import *
 from dotenv import load_dotenv
 from openai import AzureOpenAI
 from opensearchpy import OpenSearch
@@ -88,6 +88,19 @@ def retrieve_doc(open_search_client, document_id, index_name):
 
     except Exception as e:
         print(f"Error retrieving documents: {str(e)}")
+        return None
+
+
+def get_doc_title(json_blocks):
+    '''
+    Get document title from the JSON blocks of a document.
+    '''
+    try:
+        doc_title = json_blocks.get('Judul', '')
+        return doc_title
+    
+    except Exception as e:
+        print(f"Error getting document title: {str(e)}", file=sys.stderr)
         return None
 
 
