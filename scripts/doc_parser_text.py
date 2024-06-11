@@ -1,9 +1,11 @@
 import re
+import sys
 
 
 def DetectDefinition(Text):
     Keywords = ["adalah", "merupakan", "yang selanjutnya disebut", "yang selanjutnya disingkat",]
     return any(Keyword in Text for Keyword in Keywords)
+
 
 def ExtractDefinition(Text):
     Parts = Text.split("adalah")
@@ -14,6 +16,7 @@ def ExtractDefinition(Text):
     if len(Parts) == 1:
         Parts = Text.split("yang selanjutnya disingkat")
     return Parts[-1].strip()
+
 
 def DetectDefinitionsInText(Text):
     Sentences = re.split(r'\b\d+\.\s*', Text)
@@ -58,3 +61,17 @@ def DetectDefinitionsInText(Text):
             Results.append(result)
 
     return Results
+
+
+def get_doc_definitionterms(first_article_content):
+    '''
+    Get definition terms from the first article content.
+    '''
+    definition_terms = DetectDefinitionsInText(first_article_content)
+    terms = []
+    if definition_terms:
+        for term in definition_terms:
+            if term['Term'] is not None:
+                terms.append(term['Term'])
+    
+    return terms
