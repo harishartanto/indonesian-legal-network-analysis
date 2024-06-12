@@ -2,6 +2,7 @@ import os
 import sys
 import json
 import time
+import argparse
 from query_neo4j import *
 from query_opensearch import *
 from doc_parser_json import *
@@ -135,9 +136,17 @@ def topics_extraction(doc, doc_info):
 
 if __name__ == "__main__":
     start_time = time.time()
+    argument_parser = argparse.ArgumentParser()
+    argument_parser.add_argument(
+        "--document_slug", 
+        type=str,
+        help="The ID or slug of the document in OpenSearch.",
+        required=True
+    )
+    args = argument_parser.parse_args()
 
+    document_id = args.document_slug
     output_path = os.path.join(os.path.dirname(__file__), '..\\data', 'output')
-    document_id = sys.argv[1]
 
     document, document_info = retrieve_doc_info(opensearch_client, document_id, document_index)
     topic_result = topics_extraction(document, document_info)
