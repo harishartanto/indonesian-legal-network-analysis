@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Network Analytics</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onload="draw()">
+    <div class="container">
+        <div id="viz"></div>
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <h2>Pencarian Peraturan</h2>
+                <div class="form-group">
+                    <label for="nomorPeraturan">Nomor Peraturan</label>
+                    <input type="text" id="nomorPeraturan" placeholder="Masukkan Nomor Peraturan">
+                </div>
+                <div class="buttons">
+                    <input type="submit" value="Submit" id="reload-i">
+                </div>
+            </div>
+            <div class="sidebar-section">
+                <h2>Pencarian Berdasarkan Kategori</h2>
+                <div class="form-group">
+                    <label for="namaTopik">Nama Topik</label>
+                    <input type="text" id="namaTopik" placeholder="Masukkan Nama Topik">
+                </div>
+                <div class="form-group">
+                    <label for="tahun">Tahun</label>
+                    <input type="number" id="tahun" placeholder="Masukkan Tahun">
+                </div>               
+                <div class="form-group">
+                    <label for="bentukPeraturan">Bentuk Peraturan</label>
+                    <input type="text" id="bentukPeraturan" placeholder="Masukkan Bentuk Peraturan">
+                </div>
+                <div class="form-group">
+                    <label for="statusPeraturan">Status Peraturan</label>
+                    <select id="statusPeraturan">
+                        <option value="">Pilih Status</option>
+                        <option value="Berlaku">Berlaku</option>
+                        <option value="Tidak Berlaku">Tidak Berlaku</option>
+                    </select>
+                </div>
+                <div class="buttons">
+                    <input type="submit" value="Submit" id="reload">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/neovis.js@2.0.2"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>
