@@ -4,6 +4,11 @@ import sys
 def index_generated_topic(client, document_id, data):
     '''
     Index the generated topics and related information back to OpenSearch.
+
+    Parameters:
+    - client: The OpenSearch client instance.
+    - document_id: The ID of the document to index.
+    - data: The data to index.
     '''
     try:
         index_exists = client.indices.exists(index='produk_hukum_analysis') # check if the index exists, if not create the index
