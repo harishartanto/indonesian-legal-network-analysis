@@ -11,7 +11,7 @@ def index_generated_topic(client, document_id, data):
     - data: The data to index.
     '''
     try:
-        index_exists = client.indices.exists(index='produk_hukum_analysis') # check if the index exists, if not create the index
+        index_exists = client.indices.exists(index='produk_hukum_topik') # check if the index exists, if not create the index
         if not index_exists: # create the index if it does not exist
             client.indices.create(
                 index='produk_hukum_topik', 
