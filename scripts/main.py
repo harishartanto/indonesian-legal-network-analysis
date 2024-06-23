@@ -125,9 +125,11 @@ def topics_extraction(doc, doc_info):
         doc_topics[-1] = doc_topics[-1].replace(".", "") # remove dot (.) from the last element of the topics list.
         doc_topics = [topic for topic in doc_topics if topic not in ban_topics] # remove ban topics from the list
 
+        # join keywords and topics list
+        doc_topics = keywords + doc_topics
+
         # result in dictionary/json format
         result = {
-            "Kata Kunci": keywords,
             "Topik": doc_topics,
         }
 
