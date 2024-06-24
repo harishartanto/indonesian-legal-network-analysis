@@ -6,7 +6,7 @@
     <title>Legal Network Analytics</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body onload="draw()">
+<body onload="init()">
     <div class="container">
         <div id="viz"></div>
         <div class="sidebar">
@@ -17,7 +17,7 @@
                     <input type="text" id="nomorPeraturan" placeholder="Masukkan Nomor Peraturan">
                 </div>
                 <div class="buttons">
-                    <input type="submit" value="Submit" id="reload-i">
+                    <input type="submit" value="Cari" id="searchPeraturan">
                 </div>
             </div>
             <div class="sidebar-section">
@@ -39,11 +39,11 @@
                     <select id="statusPeraturan">
                         <option value="">Pilih Status</option>
                         <option value="Berlaku">Berlaku</option>
-                        <option value="Tidak Berlaku">Tidak Berlaku</option>
+                        <option value="TidakBerlaku">Tidak Berlaku</option>
                     </select>
                 </div>
                 <div class="buttons">
-                    <input type="submit" value="Submit" id="reload">
+                    <input type="submit" value="Cari" id="searchKategori">
                 </div>
             </div>
         </div>

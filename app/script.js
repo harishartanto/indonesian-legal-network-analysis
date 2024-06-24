@@ -38,13 +38,21 @@ function customObjectToTitleString(node) {
     return titleString;
 }
 
-function draw() {
+function init() {
+    fetch('/env')
+        .then(response => response.json())
+        .then(env => {
+            draw(env.NEO4J_URI, env.NEO4J_USERNAME, env.NEO4J_PASSWORD);
+        });
+}
+
+function draw(serverUrl, serverUser, serverPassword) {
     var config = {
         containerId: "viz",
         neo4j: {
-            serverUrl: "bolt://localhost:7687",
-            serverUser: "neo4j",
-            serverPassword: "0987654321"
+            serverUrl: serverUrl,
+            serverUser: serverUser,
+            serverPassword: serverPassword
         },
 
         visConfig: {
@@ -99,7 +107,7 @@ function draw() {
                 }
             },
             Bentuk: {
-                label: "name",
+                label: "namaBentuk",
                 [NeoVis.NEOVIS_ADVANCED_CONFIG]: {
                     static: {
                         color: "#8B4513" // Brown color
@@ -107,11 +115,11 @@ function draw() {
                 }
             },
             Tahun: {
-                label: "thn",
+                label: "tahun",
                 [NeoVis.NEOVIS_ADVANCED_CONFIG]: {
                     function: {
                         label: (node) => {
-                            return node.properties.thn.toString();
+                            return node.properties.tahun.toString();
                         }
                     },
                     static: {
@@ -131,7 +139,7 @@ function draw() {
             }
         },
 
-        initialCypher: "MATCH (n)-[r]-(m) RETURN n, r, m"
+        initialCypher: "MATCH (n) OPTIONAL MATCH (n)-[r]-(m) RETURN n, r, m LIMIT 100"
     };
 
     viz = new NeoVis.default(config);
