@@ -35,27 +35,28 @@ def create_graph(tx, document_info, document_topics):
         bentuk=bentuk
     )
 
-    # create Bentuk node
+    # create Bentuk node and delete bentuk property from Peraturan node
     tx.run("""
         MERGE (b:Bentuk {name: $bentuk})
         WITH b
         MATCH (p:Peraturan {nomorPeraturan: $nomor_peraturan})
         MERGE (p)-[:BERBENTUK]->(b)
-        SET p.bentuk = null
+        SET p.namaBentuk = null
         RETURN p, b
         """,
         nomor_peraturan=nomor_peraturan,
         bentuk=bentuk
     )
     
-    # create Tahun node and specific relationship
+    # create Tahun node and specific relationship and delete tahun property from Peraturan node
     relationship_name = f"DITERBITKAN_{tahun}"
     tx.run(f"""
         MERGE (t:Tahun {{tahun: $tahun}})
         WITH t
         MATCH (p:Peraturan {{nomorPeraturan: $nomor_peraturan}})
         MERGE (p)-[r:{relationship_name}]->(t)
-        RETURN p, t, r
+        SET p.tahun = null
+        RETURN t, r
         """,
         nomor_peraturan=nomor_peraturan,
         tahun=tahun
