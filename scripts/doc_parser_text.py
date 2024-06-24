@@ -65,11 +65,9 @@ def get_doc_definitionterms(first_article_content):
     '''
     definition_terms = detect_definitions_in_text(first_article_content)
     terms = []
-    if definition_terms:
-        for definition_term in definition_terms:
-            if definition_term['ShortTerm'] is not None:
-                terms.append(definition_term['ShortTerm'])
-    
+    for definition_index in definition_terms:
+        if definition_terms[definition_index]['ShortTerm'] is not None:
+            terms.append(definition_terms[definition_index]['ShortTerm'])
     return terms
 
 def split_headingterms(heading_content, splitter):
