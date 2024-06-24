@@ -159,6 +159,76 @@ function draw(serverUrl, serverUser, serverPassword) {
     });
 }
 
+// Fungsi untuk memeriksa hasil query
+function checkQueryResults(e) {
+    var data = viz.network.body.data;
+    var nodesCount = data.nodes.length;
+    var edgesCount = data.edges.length;
+
+    if (nodesCount === 0 && edgesCount === 0) {
+        alert("Pencarian tidak menemukan hasil.");
+    }
+}
+
+// Fungsi untuk mencari peraturan berdasarkan nomor peraturan
+$("#searchPeraturan").click(function () {
+    var nomorPeraturan = $("#nomorPeraturan").val();
+    if (nomorPeraturan.length > 0) {
+        var cypher = `
+            MATCH (p1:Peraturan {nomorPeraturan: '${nomorPeraturan}'})-[r1]-(connectedNodes)
+            WITH p1, r1, connectedNodes
+            OPTIONAL MATCH (p1)-[:MEMILIKI_TOPIK]->(t:Topik)<-[:MEMILIKI_TOPIK]-(p2:Peraturan)
+            WITH p1, r1, connectedNodes, t, p2
+            OPTIONAL MATCH (p2)-[r2]-(t) // Menambahkan hubungan antara p2 dan topik t
+            RETURN p1, r1, connectedNodes, t, p2, r2
+        `;
+        viz.renderWithCypher(cypher);
+        viz.registerOnEvent("completed", checkQueryResults);
+    } else {
+        alert("Masukkan nomor peraturan.");
+    }
+});
+
+// Fungsi untuk mencari peraturan berdasarkan kategori
+$("#searchKategori").click(function () {
+    var namaTopik = $("#namaTopik").val();
+    var tahun = $("#tahun").val();
+    var bentukPeraturan = $("#bentukPeraturan").val();
+    var statusPeraturan = $("#statusPeraturan").val();
+
+    var matchClauses = [];
+    var whereClauses = [];
+
+    if (namaTopik) {
+        matchClauses.push("(t:Topik {namaTopik: '" + namaTopik + "'})<-[:MEMILIKI_TOPIK]-(p:Peraturan)");
+    }
+    if (tahun) {
+        matchClauses.push("(p)-[:DITERBITKAN_" + tahun + "]-(t2:Tahun)");
+    }
+    if (bentukPeraturan) {
+        matchClauses.push("(p)-[:BERBENTUK]->(b:Bentuk {namaBentuk: '" + bentukPeraturan + "'})");
+    }
+    if (statusPeraturan) {
+        whereClauses.push("p:" + statusPeraturan);
+    }
+
+    var matchClause = matchClauses.length > 0 ? "MATCH " + matchClauses.join(' MATCH ') : 'MATCH (p:Peraturan)';
+    var whereClause = whereClauses.length > 0 ? "WHERE " + whereClauses.join(' AND ') : '';
+
+    var cypher = `
+        ${matchClause}
+        ${whereClause}
+        OPTIONAL MATCH (p)-[:MEMILIKI_TOPIK]->(t:Topik)<-[:MEMILIKI_TOPIK]-(related:Peraturan)
+        OPTIONAL MATCH (p)-[r1]-(n1)
+        OPTIONAL MATCH (related)-[r2]-(n2)
+        RETURN p, t, related, r1, n1, r2, n2
+    `;
+    
+    console.log(cypher); // Debug: lihat query yang dibentuk
+    viz.renderWithCypher(cypher);
+    viz.registerOnEvent("completed", checkQueryResults);
+});
+
 $("#reload").click(function () {
     var cypher = $("#cypher").val();
 
