@@ -5,46 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legal Network Analytics</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
-<body onload="init()">
-    <div class="container">
-        <div id="viz"></div>
-        <div class="sidebar">
-            <div class="sidebar-section">
-                <h2>Pencarian Peraturan</h2>
-                <div class="form-group">
-                    <label for="nomorPeraturan">Nomor Peraturan</label>
-                    <input type="text" id="nomorPeraturan" placeholder="Masukkan Nomor Peraturan">
-                </div>
-                <div class="buttons">
-                    <input type="submit" value="Cari" id="searchPeraturan">
-                </div>
+<body onload="init()" class="vh-100">
+    <div class="container-fluid h-100">
+        <div class="row h-100 d-flex flex-row">
+            <div class="col-md-9 h-100 d-flex flex-column">
+                <div id="viz" class="flex-grow-1 border"></div>
             </div>
-            <div class="sidebar-section">
-                <h2>Pencarian Berdasarkan Kategori</h2>
-                <div class="form-group">
-                    <label for="namaTopik">Nama Topik</label>
-                    <input type="text" id="namaTopik" placeholder="Masukkan Nama Topik">
+            <div class="col-md-3 h-100 d-flex flex-column">
+                <div class="card mb-3 flex-grow-2">
+                    <div class="card-body d-flex flex-column">
+                        <h2 class="card-title">Pencarian Peraturan</h2>
+                        <div class="form-group mb-3">
+                            <label for="nomorPeraturan">Nomor Peraturan</label>
+                            <input type="text" class="form-control" id="nomorPeraturan" placeholder="Masukkan Nomor Peraturan">
+                        </div>
+                        <button class="btn btn-primary mt-2" id="searchPeraturan">Cari</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="tahun">Tahun</label>
-                    <select id="tahun"></select>
-                </div>               
-                <div class="form-group">
-                    <label for="bentukPeraturan">Bentuk Peraturan</label>
-                    <input type="text" id="bentukPeraturan" placeholder="Masukkan Bentuk Peraturan">
-                </div>
-                <div class="form-group">
-                    <label for="statusPeraturan">Status Peraturan</label>
-                    <select id="statusPeraturan">
-                        <option value="">Pilih Status</option>
-                        <option value="Berlaku">Berlaku</option>
-                        <option value="TidakBerlaku">Tidak Berlaku</option>
-                    </select>
-                </div>
-                <div class="buttons">
-                    <input type="submit" value="Cari" id="searchKategori">
+                <div class="card flex-grow-2">
+                    <div class="card-body d-flex flex-column">
+                        <h2 class="card-title">Pencarian Berdasarkan Kategori</h2>
+                        <div class="form-group mb-3">
+                            <label for="namaTopik">Nama Topik</label>
+                            <input type="text" class="form-control" id="namaTopik" placeholder="Masukkan Nama Topik">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="tahun">Tahun</label>
+                            <select class="form-control" id="tahun"></select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="bentukPeraturan">Bentuk Peraturan</label>
+                            <input type="text" class="form-control" id="bentukPeraturan" placeholder="Masukkan Bentuk Peraturan">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="statusPeraturan">Status Peraturan</label>
+                            <select class="form-control" id="statusPeraturan">
+                                <option value="">Pilih Status</option>
+                                <option value="Berlaku">Berlaku</option>
+                                <option value="Tidak Berlaku">Tidak Berlaku</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary mt-2" id="searchKategori">Cari</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -52,6 +57,7 @@
     <script src="https://unpkg.com/neovis.js@2.0.2"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

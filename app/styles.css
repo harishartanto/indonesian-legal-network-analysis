@@ -1,65 +1,14 @@
-
-
-html, body {
-    font: 16pt arial;
-    margin: 0;
-    padding: 0;
+body, html {
     height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-.container {
-    display: flex;
-    height: 100vh;
+.container-fluid {
+    padding-top: 10px; /* Adjust padding as needed */
 }
 
 #viz {
-    flex: 3;
     border: 1px solid lightgray;
-    margin: 10px;
-}
-
-.sidebar {
-    flex: 1;
-    border: 1px solid lightgray;
-    margin: 10px;
-    padding: 10px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-}
-
-.sidebar-section {
-    margin-bottom: 20px;
-}
-
-.sidebar h2 {
-    margin-top: 0;
-    margin-bottom: 10px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.form-group input, .form-group select {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-}
-
-.buttons {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.buttons input {
-    flex: 1;
-    width: 100px;
-    padding: 10px;
-    box-sizing: border-box;
+    height: 100%; /* Ensure the height is consistent */
 }
