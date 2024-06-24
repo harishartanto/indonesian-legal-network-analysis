@@ -7,3 +7,4 @@ data/docs/
 __pycache__/
 topic extraction/__pycache__
 topic visualization/lib/
+node_modules/
