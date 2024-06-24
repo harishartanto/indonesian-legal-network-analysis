@@ -44,6 +44,57 @@ function init() {
         .then(env => {
             draw(env.NEO4J_URI, env.NEO4J_USERNAME, env.NEO4J_PASSWORD);
         });
+
+    // Initialize autocomplete for Nomor Peraturan
+    $("#nomorPeraturan").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "/nomorPeraturan",
+                dataType: "json",
+                success: function (data) {
+                    response(data.filter(item => item.toLowerCase().includes(request.term.toLowerCase())));
+                }
+            });
+        },
+        minLength: 2
+    });
+
+    // Initialize autocomplete for Nama Topik
+    $("#namaTopik").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "/topik",
+                dataType: "json",
+                success: function (data) {
+                    response(data.filter(item => item.toLowerCase().includes(request.term.toLowerCase())));
+                }
+            });
+        },
+        minLength: 2
+    });
+
+    // Initialize autocomplete for Bentuk Peraturan
+    $("#bentukPeraturan").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "/bentukPeraturan",
+                dataType: "json",
+                success: function (data) {
+                    response(data.filter(item => item.toLowerCase().includes(request.term.toLowerCase())));
+                }
+            });
+        },
+        minLength: 2
+    });
+    
+    // Populate tahun dropdown
+    const currentYear = new Date().getFullYear();
+    const startYear = 1945;
+    let tahunOptions = '<option value="">Pilih Tahun</option>';
+    for (let year = currentYear; year >= startYear; year--) {
+        tahunOptions += `<option value="${year}">${year}</option>`;
+    }
+    $("#tahun").html(tahunOptions);
 }
 
 function draw(serverUrl, serverUser, serverPassword) {
