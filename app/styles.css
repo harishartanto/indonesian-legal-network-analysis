@@ -5,10 +5,11 @@ body, html {
 }
 
 .container-fluid {
-    padding-top: 10px; /* Adjust padding as needed */
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #viz {
     border: 1px solid lightgray;
-    height: 100%; /* Ensure the height is consistent */
+    height: 100%;
 }

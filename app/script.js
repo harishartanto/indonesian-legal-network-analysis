@@ -123,7 +123,26 @@ function draw(serverUrl, serverUser, serverPassword) {
                     color: "#AABECF", // Light gray-blue
                     highlight: "#6BC0E3"
                 },
-            }
+            },
+            layout: {
+                improvedLayout: true,
+                hierarchical: false
+            },
+            physics: {
+                enabled: true,
+                barnesHut: {
+                    gravitationalConstant: -8000,
+                    centralGravity: 0.3,
+                    springLength: 95,
+                    springConstant: 0.04,
+                    damping: 0.09,
+                    avoidOverlap: 1
+                },
+                stabilization: {
+                    iterations: 2000,
+                    updateInterval: 25
+                }
+            },
         },
         
         labels: {
@@ -210,6 +229,15 @@ function draw(serverUrl, serverUser, serverPassword) {
     });
 }
 
+// Fungsi untuk mengosongkan field input
+function clearSearchFields() {
+    $("#nomorPeraturan").val('');
+    $("#namaTopik").val('');
+    $("#tahun").val('');
+    $("#bentukPeraturan").val('');
+    $("#statusPeraturan").val('');
+}
+
 // Fungsi untuk memeriksa hasil query
 function checkQueryResults(e) {
     var data = viz.network.body.data;
@@ -218,6 +246,7 @@ function checkQueryResults(e) {
 
     if (nodesCount === 0 && edgesCount === 0) {
         alert("Pencarian tidak menemukan hasil.");
+        clearSearchFields(); // Kosongkan field input
     }
 }
 
@@ -249,12 +278,13 @@ $("#searchKategori").click(function () {
 
     var matchClauses = [];
     var whereClauses = [];
+    var optionalMatchClauses = [];
 
     if (namaTopik) {
         matchClauses.push("(t:Topik {namaTopik: '" + namaTopik + "'})<-[:MEMILIKI_TOPIK]-(p:Peraturan)");
     }
     if (tahun) {
-        matchClauses.push("(p)-[:DITERBITKAN_" + tahun + "]-(t2:Tahun)");
+        matchClauses.push("(p)-[:`DITERBITKAN_" + tahun + "`]-(t2:Tahun)");
     }
     if (bentukPeraturan) {
         matchClauses.push("(p)-[:BERBENTUK]->(b:Bentuk {namaBentuk: '" + bentukPeraturan + "'})");
@@ -269,16 +299,20 @@ $("#searchKategori").click(function () {
     var cypher = `
         ${matchClause}
         ${whereClause}
-        OPTIONAL MATCH (p)-[:MEMILIKI_TOPIK]->(t:Topik)<-[:MEMILIKI_TOPIK]-(related:Peraturan)
         OPTIONAL MATCH (p)-[r1]-(n1)
+        WITH p, t, r1, n1
+        OPTIONAL MATCH (p)-[:MEMILIKI_TOPIK]->(t:Topik)<-[:MEMILIKI_TOPIK]-(related:Peraturan)
         OPTIONAL MATCH (related)-[r2]-(n2)
-        RETURN p, t, related, r1, n1, r2, n2
+        ${tahun ? `WHERE (p)-[:\`DITERBITKAN_${tahun}\`]-(:Tahun) AND (related IS NULL OR (related)-[:\`DITERBITKAN_${tahun}\`]-(:Tahun))` : ''}
+        ${bentukPeraturan ? `WHERE (related)-[:BERBENTUK]->(:Bentuk {namaBentuk: '${bentukPeraturan}'})` : ''}
+        RETURN p, t, r1, n1, related, r2, n2
     `;
     
     console.log(cypher); // Debug: lihat query yang dibentuk
     viz.renderWithCypher(cypher);
     viz.registerOnEvent("completed", checkQueryResults);
 });
+
 
 $("#reload").click(function () {
     var cypher = $("#cypher").val();
