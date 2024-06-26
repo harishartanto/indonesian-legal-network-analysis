@@ -1,6 +1,6 @@
 # Legal Network Analytics
 ## Deskripsi
-Legal Network Analytics adalah teknologi canggih yang mengaplikasikan AI dan teknologi graf untuk memetakan hubungan antar peraturan perundang-undangan. Proyek ini, yang merupakan inisiatif dari Biro Hukum Sekretariat Jenderal Kementerian Keuangan, berada di bawah naungan Pengembangan Teknologi Parser dan Sistem Temu Kembali pada Dokumen Peraturan Perundang-undangan. Tujuan utama dari Legal Network Analytics adalah untuk mendetailkan dan memvisualisasikan koneksi dan interaksi antar regulasi di Indonesia, sehingga mempermudah pemahaman terhadap kerangka hukum yang kompleks.
+Legal Network Analytics adalah teknologi canggih yang mengaplikasikan AI dan teknologi graf untuk memetakan hubungan antar peraturan perundang-undangan. Proyek ini, yang merupakan inisiatif dari Biro Hukum Sekretariat Jenderal Kementerian Keuangan, yang dilandasi dari Proyek Pengembangan Teknologi Parser dan Sistem Temu Kembali pada Dokumen Peraturan Perundang-undangan. Tujuan utama dari Legal Network Analytics adalah untuk mendetailkan dan memvisualisasikan koneksi dan interaksi antar regulasi di Indonesia, sehingga mempermudah pemahaman terhadap kerangka hukum yang kompleks.
 
 Dalam pengembangan ini, teknologi AI ChatGPT diterapkan untuk mengidentifikasi dan mengekstrak tema serta topik penting dari dokumen hukum. Sementara itu, Neo4j digunakan untuk membangun database graf yang efektif dalam memetakan hubungan inter-dokumentasi peraturan perundang-undangan. 
 
