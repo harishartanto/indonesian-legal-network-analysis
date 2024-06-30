@@ -278,10 +278,11 @@ $("#searchKategori").click(function () {
 
     var matchClauses = [];
     var whereClauses = [];
-    var optionalMatchClauses = [];
+    var withClauses = ['p', 'r1', 'n1'];  // Initialize with mandatory variables
 
     if (namaTopik) {
         matchClauses.push("(t:Topik {namaTopik: '" + namaTopik + "'})<-[:MEMILIKI_TOPIK]-(p:Peraturan)");
+        withClauses.push('t');  // Add 't' if topik search is included
     }
     if (tahun) {
         matchClauses.push("(p)-[:`DITERBITKAN_" + tahun + "`]-(t2:Tahun)");
@@ -295,24 +296,24 @@ $("#searchKategori").click(function () {
 
     var matchClause = matchClauses.length > 0 ? "MATCH " + matchClauses.join(' MATCH ') : 'MATCH (p:Peraturan)';
     var whereClause = whereClauses.length > 0 ? "WHERE " + whereClauses.join(' AND ') : '';
+    var withClause = `WITH ${withClauses.join(', ')}`;
 
     var cypher = `
         ${matchClause}
         ${whereClause}
         OPTIONAL MATCH (p)-[r1]-(n1)
-        WITH p, t, r1, n1
+        ${withClause}
         OPTIONAL MATCH (p)-[:MEMILIKI_TOPIK]->(t:Topik)<-[:MEMILIKI_TOPIK]-(related:Peraturan)
         OPTIONAL MATCH (related)-[r2]-(n2)
         ${tahun ? `WHERE (p)-[:\`DITERBITKAN_${tahun}\`]-(:Tahun) AND (related IS NULL OR (related)-[:\`DITERBITKAN_${tahun}\`]-(:Tahun))` : ''}
-        ${bentukPeraturan ? `WHERE (related)-[:BERBENTUK]->(:Bentuk {namaBentuk: '${bentukPeraturan}'})` : ''}
-        RETURN p, t, r1, n1, related, r2, n2
+        ${bentukPeraturan ? `WHERE (related IS NULL OR (related)-[:BERBENTUK]->(:Bentuk {namaBentuk: '${bentukPeraturan}'}))` : ''}
+        RETURN p, ${withClauses.includes('t') ? 't,' : ''} r1, n1, related, r2, n2
     `;
     
     console.log(cypher); // Debug: lihat query yang dibentuk
     viz.renderWithCypher(cypher);
     viz.registerOnEvent("completed", checkQueryResults);
 });
-
 
 $("#reload").click(function () {
     var cypher = $("#cypher").val();
