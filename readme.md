@@ -1,4 +1,7 @@
 # Legal Network Analytics
+
+![LNA web page](others/LNA_web-page.png)
+
 ## Deskripsi
 Legal Network Analytics adalah teknologi canggih yang mengaplikasikan AI dan teknologi graf untuk memetakan hubungan antar peraturan perundang-undangan. Proyek ini, yang merupakan inisiatif dari Biro Hukum Sekretariat Jenderal Kementerian Keuangan, yang dilandasi dari Proyek Pengembangan Teknologi Parser dan Sistem Temu Kembali pada Dokumen Peraturan Perundang-undangan. Tujuan utama dari Legal Network Analytics adalah untuk mendetailkan dan memvisualisasikan koneksi dan interaksi antar regulasi di Indonesia, sehingga mempermudah pemahaman terhadap kerangka hukum yang kompleks.
 
